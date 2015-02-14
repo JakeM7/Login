@@ -1,4 +1,3 @@
-//Problem 6
 /*Algorithm
 1. Ask user if manager or administrator
 2. If manager ask for (username/password or biometric/secret code) and CAPTCHA
