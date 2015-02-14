@@ -1,0 +1,160 @@
+//Problem 6
+/*Algorithm
+1. Ask user if manager or administrator
+2. If manager ask for (username/password or biometric/secret code) and CAPTCHA
+3. If administrator ask for both types and CAPTCHA
+4. Allows only 3 attempts
+5. Once opened
+6. Ask for combination
+7. If = 35 then Everything is fine
+8. Else then Something went wrong
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main()
+{
+    int x; //Manager or admin
+    int i;
+    int m; //Manager's options
+    char m_usern = 'c';  //manager correct username
+    char m_usern_e;  //manager username entered
+    int m_pass = 123456;    //manager correct 6 digit password
+    int m_pass_e;      //manager password entered
+    char m_eye = 'd';   //manager eye correct
+    char m_eye_e;       //manager eye entered
+    int m_secret = 7767;  //manager 4 digit secret code correct
+    int m_secret_e;        //manager secret code entered
+
+    char a_usern = 'a';  //admin correct username
+    char a_usern_e;  //admin username entered
+    int a_pass = 987654;    //admin correct 6 digit password
+    int a_pass_e;      //admin password entered
+    char a_eye = 'w';   //admin eye correct
+    char a_eye_e;       //admin eye entered
+    int a_secret = 8878;  //admin 4 digit secret code correct
+    int a_secret_e;        //admin secret code entered
+
+    time_t t;                       //randomize numbers each time from start
+    srand((unsigned) time(&t));     //CAPTCHA code variables
+    int a = rand() % 50+1;
+    int b = rand() % 50+1;
+    int sum;
+    int user_sum;                   //CAPTCHA code variables
+
+    int one;        //product confirmation
+    int two;
+    int product;
+
+    do
+        {
+            printf("Are you...\n");
+            printf("1. Manager\n");
+            printf("2. Administrator\n");
+            scanf("%d", & x);
+        }
+            while (x!=1 && x!=2);
+
+
+    for(i=0; i<=2; i++)
+    {
+        if (x==1)
+        {
+            do
+            {
+                printf("Select method of confirmation:\n");
+                printf("1. Username and password\n");
+                printf("2. Biometric verification and secret code\n");
+                scanf("%d", & m);
+            }
+                while (m!=1 && m!=2);
+
+            if (m==1)
+            {
+                printf("Enter username:\n");
+                scanf(" %c", & m_usern_e);
+                printf("Enter password:\n");
+                scanf("%d", & m_pass_e);
+                printf("Enter CAPTCHA Challenge: What is the value of %d + %d\n", a, b);
+                scanf ("%d", & user_sum);
+
+                sum= a+b;
+
+                if (m_usern_e == m_usern && m_pass_e == m_pass && user_sum == sum)
+                {
+                    break;
+                }
+            }
+            else if (m==2)
+            {
+                printf("Place your eye up to scanner to be scanned\n");
+                scanf(" %c", & m_eye_e);
+                printf("Enter secret code\n");
+                scanf("%d", & m_secret_e);
+                printf("Enter CAPTCHA Challenge: What is the value of %d + %d\n", a, b);
+                scanf ("%d", & user_sum);
+
+                sum = a+b;
+
+                if (m_eye_e == m_eye && m_secret_e == m_secret && user_sum == sum)
+                {
+                    break;
+                }
+            }
+        }
+        if (x ==2)
+        {
+                printf("Enter username:\n");
+                scanf(" %c", & a_usern_e);
+                printf("Enter password:\n");
+                scanf("%d", & a_pass_e);
+                printf("Place your eye up to scanner to be scanned\n");
+                scanf(" %c", & a_eye_e);
+                printf("Enter secret code\n");
+                scanf("%d", & a_secret_e);
+                printf("Enter CAPTCHA Challenge: What is the value of %d + %d\n", a, b);
+                scanf ("%d", & user_sum);
+
+                sum= a+b;
+
+                if (a_usern_e == a_usern && a_pass_e == a_pass && a_eye_e == a_eye && a_secret_e == a_secret && user_sum == sum)
+                {
+                    break;
+                }
+        }
+        if (a_usern_e == a_usern && a_pass_e == a_pass && a_eye_e == a_eye && a_secret_e == a_secret && user_sum == sum)
+        {
+            break;
+        }
+        if (i==2)
+        {
+            printf("You are locked out!!\n");
+        }
+
+}
+
+if (a_usern_e == a_usern && a_pass_e == a_pass && a_eye_e == a_eye && a_secret_e == a_secret && user_sum == sum || (m_usern_e == m_usern && m_pass_e == m_pass && user_sum == sum) || (m_eye_e == m_eye && m_secret_e == m_secret && user_sum == sum) )
+{
+    printf("Confirm inspection...\n");
+    printf("Enter number one:\n");
+    scanf("%d", & one);
+    printf("Enter number two:\n");
+    scanf("%d", & two);
+
+    product= one*two;
+
+
+    if (product == 35)
+       {
+            printf("Everything is fine\n");
+        }
+    else
+    {
+        printf("Something went wrong\n");
+    }
+}
+
+return (0);
+}
